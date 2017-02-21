@@ -1,0 +1,1302 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Model.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="ModelStoreContainer">
+    <EntitySet Name="gl_options" EntityType="Model.Store.gl_options" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="gl_natural_accts" EntityType="Model.Store.gl_natural_accts" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="gl_accounts" EntityType="Model.Store.gl_accounts" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="gl_acctcats" EntityType="Model.Store.gl_acctcats" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="gl_vouchers" EntityType="Model.Store.gl_vouchers" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="gl_transactions" EntityType="Model.Store.gl_transactions" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="entidades" EntityType="Model.Store.entidades" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ar_options" EntityType="Model.Store.ar_options" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ar_cclientes" EntityType="Model.Store.ar_cclientes" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ar_clientes" EntityType="Model.Store.ar_clientes" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ie_subcats" EntityType="Model.Store.ie_subcats" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ar_invoices" EntityType="Model.Store.ar_invoices" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ar_taxinvcs" EntityType="Model.Store.ar_taxinvcs" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ar_deducinvcs" EntityType="Model.Store.ar_deducinvcs" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ar_invdetails" EntityType="Model.Store.ar_invdetails" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="gl_option_gl_voucher" Association="Model.Store.gl_option_gl_voucher">
+      <End Role="gl_option" EntitySet="gl_options" />
+      <End Role="gl_voucher" EntitySet="gl_vouchers" />
+    </AssociationSet>
+    <AssociationSet Name="gl_option_gl_natural_acct" Association="Model.Store.gl_option_gl_natural_acct">
+      <End Role="gl_option" EntitySet="gl_options" />
+      <End Role="gl_natural_acct" EntitySet="gl_natural_accts" />
+    </AssociationSet>
+    <AssociationSet Name="gl_account_gl_transaction" Association="Model.Store.gl_account_gl_transaction">
+      <End Role="gl_account" EntitySet="gl_accounts" />
+      <End Role="gl_transaction" EntitySet="gl_transactions" />
+    </AssociationSet>
+    <AssociationSet Name="gl_natural_acct_gl_account" Association="Model.Store.gl_natural_acct_gl_account">
+      <End Role="gl_natural_acct" EntitySet="gl_natural_accts" />
+      <End Role="gl_account" EntitySet="gl_accounts" />
+    </AssociationSet>
+    <AssociationSet Name="gl_acctcat_gl_natural_acct" Association="Model.Store.gl_acctcat_gl_natural_acct">
+      <End Role="gl_acctcat" EntitySet="gl_acctcats" />
+      <End Role="gl_natural_acct" EntitySet="gl_natural_accts" />
+    </AssociationSet>
+    <AssociationSet Name="ar_option_ar_ccliente" Association="Model.Store.ar_option_ar_ccliente">
+      <End Role="ar_option" EntitySet="ar_options" />
+      <End Role="ar_ccliente" EntitySet="ar_cclientes" />
+    </AssociationSet>
+    <AssociationSet Name="ar_ccliente_ar_cliente" Association="Model.Store.ar_ccliente_ar_cliente">
+      <End Role="ar_ccliente" EntitySet="ar_cclientes" />
+      <End Role="ar_cliente" EntitySet="ar_clientes" />
+    </AssociationSet>
+    <AssociationSet Name="ar_invoice_ar_taxinvc" Association="Model.Store.ar_invoice_ar_taxinvc">
+      <End Role="ar_invoice" EntitySet="ar_invoices" />
+      <End Role="ar_taxinvc" EntitySet="ar_taxinvcs" />
+    </AssociationSet>
+    <AssociationSet Name="ar_invoice_ar_deducinv" Association="Model.Store.ar_invoice_ar_deducinv">
+      <End Role="ar_invoice" EntitySet="ar_invoices" />
+      <End Role="ar_deducinvc" EntitySet="ar_deducinvcs" />
+    </AssociationSet>
+    <AssociationSet Name="ar_invoice_ar_invdetail" Association="Model.Store.ar_invoice_ar_invdetail">
+      <End Role="ar_invoice" EntitySet="ar_invoices" />
+      <End Role="ar_invdetail" EntitySet="ar_invdetails" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="gl_options">
+    <Key>
+      <PropertyRef Name="IdEdif" />
+    </Key>
+    <Property Name="IdEdif" Type="int" Nullable="false" />
+    <Property Name="AcctMask" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="AcctMaskDelimiter" Type="nchar" Nullable="false" MaxLength="1" />
+    <Property Name="AcctNoSize" Type="tinyint" Nullable="false" />
+    <Property Name="UserCreated" Type="int" Nullable="false" />
+    <Property Name="DateCreated" Type="datetime" Nullable="false" />
+    <Property Name="UserUpdated" Type="int" Nullable="true" />
+    <Property Name="DateUpdated" Type="datetime" Nullable="true" />
+    <Property Name="NextVoucherNo" Type="smallint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="gl_natural_accts">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NaturalAcctNo" Type="nvarchar" Nullable="false" MaxLength="5" />
+    <Property Name="Nombre" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="IdAcctCat" Type="int" Nullable="false" />
+    <Property Name="IdEdif" Type="int" Nullable="false" />
+    <Property Name="UserCreated" Type="int" Nullable="false" />
+    <Property Name="DateCreated" Type="datetime" Nullable="false" />
+    <Property Name="UserUpdated" Type="int" Nullable="true" />
+    <Property Name="DateUpdated" Type="datetime" Nullable="true" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="gl_accounts">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="GlAcctNo" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="Nombre" Type="nvarchar" Nullable="false" MaxLength="100" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+    <Property Name="UserCreated" Type="int" Nullable="false" />
+    <Property Name="DateCreated" Type="datetime" Nullable="false" />
+    <Property Name="UserUpdated" Type="int" Nullable="true" />
+    <Property Name="DateUpdated" Type="datetime" Nullable="true" />
+    <Property Name="IdNaturalAcct" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="gl_acctcats">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="UserCreated" Type="int" Nullable="false" />
+    <Property Name="DateCreated" Type="datetime" Nullable="false" />
+    <Property Name="UserUpdated" Type="int" Nullable="true" />
+    <Property Name="DateUpdated" Type="datetime" Nullable="true" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="gl_vouchers">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserCreated" Type="int" Nullable="false" />
+    <Property Name="DateCreated" Type="datetime" Nullable="false" />
+    <Property Name="UserUpdated" Type="int" Nullable="true" />
+    <Property Name="DateUpdated" Type="datetime" Nullable="true" />
+    <Property Name="IdEdif" Type="int" Nullable="false" />
+    <Property Name="TranDate" Type="datetime" Nullable="false" />
+    <Property Name="IdMPeriod" Type="int" Nullable="false" />
+    <Property Name="TranKey" Type="int" Nullable="false" />
+    <Property Name="IsCancel" Type="bit" Nullable="false" />
+    <Property Name="DateCanceled" Type="datetime" Nullable="true" />
+    <Property Name="VoucherId" Type="nvarchar" Nullable="false" MaxLength="20" />
+    <Property Name="Cmnt" Type="nvarchar" Nullable="false" MaxLength="255" />
+    <Property Name="TranType" Type="tinyint" Nullable="false" />
+    <Property Name="Modulo" Type="nchar" Nullable="false" MaxLength="2" />
+    <Property Name="VoucherNo" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="gl_transactions">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdGlAcct" Type="int" Nullable="false" />
+    <Property Name="TranAmt" Type="decimal" Nullable="false" Precision="19" Scale="2" />
+    <Property Name="Cmnt" Type="nvarchar" Nullable="false" MaxLength="255" />
+    <Property Name="TranId" Type="nvarchar" Nullable="false" MaxLength="20" />
+    <Property Name="SubTranType" Type="tinyint" Nullable="false" />
+    <Property Name="IdVoucher" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="entidades">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="nvarchar" Nullable="false" MaxLength="100" />
+    <Property Name="Apellidos" Type="nvarchar" Nullable="true" MaxLength="50" />
+    <Property Name="CodId" Type="nvarchar" Nullable="false" MaxLength="13" />
+    <Property Name="IsNatural" Type="bit" Nullable="false" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+    <Property Name="Email" Type="nvarchar" Nullable="true" MaxLength="100" />
+    <Property Name="Phone" Type="nvarchar" Nullable="true" MaxLength="20" />
+    <Property Name="Movil" Type="nvarchar" Nullable="true" MaxLength="20" />
+    <Property Name="IdPais" Type="int" Nullable="false" />
+    <Property Name="IdAdminPropiedades" Type="int" Nullable="false" />
+    <Property Name="UserCreated" Type="int" Nullable="false" />
+    <Property Name="DateCreated" Type="datetime" Nullable="false" />
+    <Property Name="UserUpdated" Type="int" Nullable="true" />
+    <Property Name="DateUpdated" Type="datetime" Nullable="true" />
+    <Property Name="Direccion" Type="nvarchar" Nullable="false" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="ar_options">
+    <Key>
+      <PropertyRef Name="IdEdif" />
+    </Key>
+    <Property Name="IdEdif" Type="int" Nullable="false" />
+    <Property Name="NextInvcNo" Type="int" Nullable="false" />
+    <Property Name="InvcNoSize" Type="tinyint" Nullable="false" />
+    <Property Name="UserCreated" Type="int" Nullable="false" />
+    <Property Name="DateCreated" Type="datetime" Nullable="false" />
+    <Property Name="UserUpdated" Type="int" Nullable="true" />
+    <Property Name="DateUpdated" Type="datetime" Nullable="true" />
+    <Property Name="IdGlAcctAnticipo" Type="int" Nullable="true" />
+  </EntityType>
+  <EntityType Name="ar_cclientes">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ArCClienteCod" Type="nvarchar" Nullable="false" MaxLength="10" />
+    <Property Name="Nombre" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="IdEdif" Type="int" Nullable="false" />
+    <Property Name="UserCreated" Type="int" Nullable="false" />
+    <Property Name="DateCreated" Type="datetime" Nullable="false" />
+    <Property Name="UserUpdated" Type="int" Nullable="true" />
+    <Property Name="DateUpdated" Type="datetime" Nullable="true" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+    <Property Name="IdGlAcct" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ar_clientes">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdCCliente" Type="int" Nullable="false" />
+    <Property Name="UserCreated" Type="int" Nullable="false" />
+    <Property Name="DateCreated" Type="datetime" Nullable="false" />
+    <Property Name="UserUpdated" Type="int" Nullable="true" />
+    <Property Name="DateUpdated" Type="datetime" Nullable="true" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+    <Property Name="Flag1" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ie_subcats">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IgEgSubCatCod" Type="nvarchar" Nullable="false" MaxLength="15" />
+    <Property Name="Concepto" Type="nvarchar" Nullable="false" MaxLength="100" />
+    <Property Name="IdIgEgCat" Type="int" Nullable="false" />
+    <Property Name="ReadOnly" Type="bit" Nullable="false" />
+    <Property Name="IdGlAcct" Type="int" Nullable="false" />
+    <Property Name="UserCreated" Type="int" Nullable="false" />
+    <Property Name="DateCreated" Type="datetime" Nullable="false" />
+    <Property Name="UserUpdated" Type="int" Nullable="true" />
+    <Property Name="DateUpdated" Type="datetime" Nullable="true" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+    <Property Name="IdClassTax" Type="int" Nullable="true" />
+    <Property Name="IdClassDeduc" Type="int" Nullable="true" />
+    <Property Name="Precio" Type="decimal" Nullable="false" Precision="19" Scale="2" />
+    <Property Name="IsExpense" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ar_invoices">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TranDate" Type="datetime" Nullable="false" />
+    <Property Name="TranType" Type="tinyint" Nullable="false" />
+    <Property Name="TranAmt" Type="decimal" Nullable="false" Precision="19" Scale="2" />
+    <Property Name="Cmnt" Type="nvarchar" Nullable="false" MaxLength="255" />
+    <Property Name="IdMPeriod" Type="int" Nullable="false" />
+    <Property Name="UserCreated" Type="int" Nullable="false" />
+    <Property Name="DateCreated" Type="datetime" Nullable="false" />
+    <Property Name="UserUpdated" Type="int" Nullable="true" />
+    <Property Name="DateUpdated" Type="datetime" Nullable="true" />
+    <Property Name="IdCliente" Type="int" Nullable="false" />
+    <Property Name="IdCCliente" Type="int" Nullable="false" />
+    <Property Name="DateCanceled" Type="datetime" Nullable="true" />
+    <Property Name="TaxAmt" Type="decimal" Nullable="false" Precision="19" Scale="2" />
+    <Property Name="Descount" Type="decimal" Nullable="false" Precision="19" Scale="2" />
+    <Property Name="IsCancel" Type="bit" Nullable="false" />
+    <Property Name="IsPend" Type="bit" Nullable="false" />
+    <Property Name="DatePayed" Type="datetime" Nullable="true" />
+    <Property Name="CodId" Type="nvarchar" Nullable="false" MaxLength="13" />
+    <Property Name="ANombre" Type="nvarchar" Nullable="false" MaxLength="150" />
+    <Property Name="TranNo" Type="int" Nullable="false" />
+    <Property Name="ToMonth" Type="tinyint" Nullable="false" />
+    <Property Name="TranAmtHc" Type="decimal" Nullable="false" Precision="19" Scale="2" />
+    <Property Name="Direccion" Type="nvarchar" Nullable="false" MaxLength="255" />
+    <Property Name="EntityType" Type="nchar" Nullable="false" MaxLength="1" />
+    <Property Name="ToYear" Type="smallint" Nullable="false" />
+    <Property Name="SubTotal" Type="decimal" Nullable="false" Precision="19" Scale="2" />
+    <Property Name="Base0" Type="decimal" Nullable="false" Precision="19" Scale="2" />
+    <Property Name="BaseIVA" Type="decimal" Nullable="false" Precision="19" Scale="2" />
+    <Property Name="IVA" Type="decimal" Nullable="false" Precision="19" Scale="2" />
+    <Property Name="Phone" Type="nvarchar" Nullable="true" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="ar_taxinvcs">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdInvoice" Type="int" Nullable="false" />
+    <Property Name="TaxAmt" Type="decimal" Nullable="false" Precision="19" Scale="2" />
+    <Property Name="IsPercentage" Type="bit" Nullable="false" />
+    <Property Name="Valor" Type="decimal" Nullable="false" Precision="19" Scale="2" />
+    <Property Name="Nombre" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="IsIva" Type="bit" Nullable="false" />
+    <Property Name="Base" Type="decimal" Nullable="false" Precision="19" Scale="2" />
+  </EntityType>
+  <EntityType Name="ar_deducinvcs">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdInvoice" Type="int" Nullable="false" />
+    <Property Name="DeducAmt" Type="decimal" Nullable="false" Precision="19" Scale="2" />
+    <Property Name="IsPercentage" Type="bit" Nullable="false" />
+    <Property Name="Valor" Type="decimal" Nullable="false" Precision="19" Scale="2" />
+    <Property Name="Nombre" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="IsPtoPago" Type="bit" Nullable="false" />
+    <Property Name="Base" Type="decimal" Nullable="false" Precision="19" Scale="2" />
+  </EntityType>
+  <EntityType Name="ar_invdetails">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdInvoice" Type="int" Nullable="false" />
+    <Property Name="IdIgEgSubCat" Type="int" Nullable="false" />
+    <Property Name="Valor" Type="decimal" Nullable="false" Precision="19" Scale="2" />
+    <Property Name="Descount" Type="decimal" Nullable="false" Precision="19" Scale="2" />
+    <Property Name="TaxAmt" Type="decimal" Nullable="false" Precision="19" Scale="2" />
+    <Property Name="Base" Type="decimal" Nullable="false" Precision="19" Scale="2" />
+    <Property Name="Precio" Type="decimal" Nullable="false" Precision="19" Scale="2" />
+    <Property Name="Qty" Type="decimal" Nullable="false" Precision="19" Scale="2" />
+  </EntityType>
+  <Association Name="gl_option_gl_voucher">
+    <End Role="gl_option" Type="Model.Store.gl_options" Multiplicity="1" />
+    <End Role="gl_voucher" Type="Model.Store.gl_vouchers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="gl_option">
+        <PropertyRef Name="IdEdif" />
+      </Principal>
+      <Dependent Role="gl_voucher">
+        <PropertyRef Name="IdEdif" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="gl_option_gl_natural_acct">
+    <End Role="gl_option" Type="Model.Store.gl_options" Multiplicity="1" />
+    <End Role="gl_natural_acct" Type="Model.Store.gl_natural_accts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="gl_option">
+        <PropertyRef Name="IdEdif" />
+      </Principal>
+      <Dependent Role="gl_natural_acct">
+        <PropertyRef Name="IdEdif" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="gl_account_gl_transaction">
+    <End Role="gl_account" Type="Model.Store.gl_accounts" Multiplicity="1" />
+    <End Role="gl_transaction" Type="Model.Store.gl_transactions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="gl_account">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="gl_transaction">
+        <PropertyRef Name="IdGlAcct" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="gl_natural_acct_gl_account">
+    <End Role="gl_natural_acct" Type="Model.Store.gl_natural_accts" Multiplicity="1" />
+    <End Role="gl_account" Type="Model.Store.gl_accounts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="gl_natural_acct">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="gl_account">
+        <PropertyRef Name="IdNaturalAcct" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="gl_acctcat_gl_natural_acct">
+    <End Role="gl_acctcat" Type="Model.Store.gl_acctcats" Multiplicity="1" />
+    <End Role="gl_natural_acct" Type="Model.Store.gl_natural_accts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="gl_acctcat">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="gl_natural_acct">
+        <PropertyRef Name="IdAcctCat" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ar_option_ar_ccliente">
+    <End Role="ar_option" Type="Model.Store.ar_options" Multiplicity="1" />
+    <End Role="ar_ccliente" Type="Model.Store.ar_cclientes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ar_option">
+        <PropertyRef Name="IdEdif" />
+      </Principal>
+      <Dependent Role="ar_ccliente">
+        <PropertyRef Name="IdEdif" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ar_ccliente_ar_cliente">
+    <End Role="ar_ccliente" Type="Model.Store.ar_cclientes" Multiplicity="1" />
+    <End Role="ar_cliente" Type="Model.Store.ar_clientes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ar_ccliente">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ar_cliente">
+        <PropertyRef Name="IdCCliente" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ar_invoice_ar_taxinvc">
+    <End Role="ar_invoice" Type="Model.Store.ar_invoices" Multiplicity="1" />
+    <End Role="ar_taxinvc" Type="Model.Store.ar_taxinvcs" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ar_invoice">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ar_taxinvc">
+        <PropertyRef Name="IdInvoice" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ar_invoice_ar_deducinv">
+    <End Role="ar_invoice" Type="Model.Store.ar_invoices" Multiplicity="1" />
+    <End Role="ar_deducinvc" Type="Model.Store.ar_deducinvcs" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ar_invoice">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ar_deducinvc">
+        <PropertyRef Name="IdInvoice" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ar_invoice_ar_invdetail">
+    <End Role="ar_invoice" Type="Model.Store.ar_invoices" Multiplicity="1" />
+    <End Role="ar_invdetail" Type="Model.Store.ar_invdetails" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ar_invoice">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ar_invdetail">
+        <PropertyRef Name="IdInvoice" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="DefaultContext" annotation:LazyLoadingEnabled="true" >
+          <EntitySet Name="gl_options" EntityType="Model.gl_option" />
+          <EntitySet Name="gl_natural_accts" EntityType="Model.gl_natural_acct" />
+          <EntitySet Name="gl_accounts" EntityType="Model.gl_account" />
+          <EntitySet Name="gl_acctcats" EntityType="Model.gl_acctcat" />
+          <EntitySet Name="gl_vouchers" EntityType="Model.gl_voucher" />
+          <EntitySet Name="gl_transactions" EntityType="Model.gl_transaction" />
+          <AssociationSet Name="gl_option_gl_voucher" Association="Model.gl_option_gl_voucher">
+            <End Role="gl_option" EntitySet="gl_options" />
+            <End Role="gl_voucher" EntitySet="gl_vouchers" />
+          </AssociationSet>
+          <AssociationSet Name="gl_option_gl_natural_acct" Association="Model.gl_option_gl_natural_acct">
+            <End Role="gl_option" EntitySet="gl_options" />
+            <End Role="gl_natural_acct" EntitySet="gl_natural_accts" />
+          </AssociationSet>
+          <AssociationSet Name="gl_account_gl_transaction" Association="Model.gl_account_gl_transaction">
+            <End Role="gl_account" EntitySet="gl_accounts" />
+            <End Role="gl_transaction" EntitySet="gl_transactions" />
+          </AssociationSet>
+          <AssociationSet Name="gl_natural_acct_gl_account" Association="Model.gl_natural_acct_gl_account">
+            <End Role="gl_natural_acct" EntitySet="gl_natural_accts" />
+            <End Role="gl_account" EntitySet="gl_accounts" />
+          </AssociationSet>
+          <AssociationSet Name="gl_acctcat_gl_natural_acct" Association="Model.gl_acctcat_gl_natural_acct">
+            <End Role="gl_acctcat" EntitySet="gl_acctcats" />
+            <End Role="gl_natural_acct" EntitySet="gl_natural_accts" />
+          </AssociationSet>
+          <EntitySet Name="entidades" EntityType="Model.entidad" />
+          <EntitySet Name="ar_options" EntityType="Model.ar_option" />
+          <EntitySet Name="ar_cclientes" EntityType="Model.ar_ccliente" />
+          <EntitySet Name="ar_clientes" EntityType="Model.ar_cliente" />
+          <AssociationSet Name="ar_option_ar_ccliente" Association="Model.ar_option_ar_ccliente">
+            <End Role="ar_option" EntitySet="ar_options" />
+            <End Role="ar_ccliente" EntitySet="ar_cclientes" />
+          </AssociationSet>
+          <AssociationSet Name="ar_ccliente_ar_cliente" Association="Model.ar_ccliente_ar_cliente">
+            <End Role="ar_ccliente" EntitySet="ar_cclientes" />
+            <End Role="ar_cliente" EntitySet="ar_clientes" />
+          </AssociationSet>
+          <EntitySet Name="ie_subcats" EntityType="Model.ie_subcat" />
+          <EntitySet Name="ar_invoices" EntityType="Model.ar_invoice" />
+          <EntitySet Name="ar_taxinvcs" EntityType="Model.ar_taxinvc" />
+          <EntitySet Name="ar_deducinvcs" EntityType="Model.ar_deducinvc" />
+          <EntitySet Name="ar_invdetails" EntityType="Model.ar_invdetail" />
+          <AssociationSet Name="ar_invoice_ar_taxinvc" Association="Model.ar_invoice_ar_taxinvc">
+            <End Role="ar_invoice" EntitySet="ar_invoices" />
+            <End Role="ar_taxinvc" EntitySet="ar_taxinvcs" />
+          </AssociationSet>
+          <AssociationSet Name="ar_invoice_ar_deducinv" Association="Model.ar_invoice_ar_deducinv">
+            <End Role="ar_invoice" EntitySet="ar_invoices" />
+            <End Role="ar_deducinvc" EntitySet="ar_deducinvcs" />
+          </AssociationSet>
+          <AssociationSet Name="ar_invoice_ar_invdetail" Association="Model.ar_invoice_ar_invdetail">
+            <End Role="ar_invoice" EntitySet="ar_invoices" />
+            <End Role="ar_invdetail" EntitySet="ar_invdetails" />
+          </AssociationSet>
+          <AssociationSet Name="gl_voucher_gl_transaction" Association="Model.gl_voucher_gl_transaction">
+            <End Role="gl_voucher" EntitySet="gl_vouchers" />
+            <End Role="gl_transaction" EntitySet="gl_transactions" />
+          </AssociationSet>
+          <AssociationSet Name="gl_account_ar_option" Association="Model.gl_account_ar_option">
+            <End Role="gl_account" EntitySet="gl_accounts" />
+            <End Role="ar_option" EntitySet="ar_options" />
+          </AssociationSet>
+          <AssociationSet Name="gl_account_ar_ccliente" Association="Model.gl_account_ar_ccliente">
+            <End Role="gl_account" EntitySet="gl_accounts" />
+            <End Role="ar_ccliente" EntitySet="ar_cclientes" />
+          </AssociationSet>
+          <AssociationSet Name="entidad_ar_cliente" Association="Model.entidad_ar_cliente">
+            <End Role="entidad" EntitySet="entidades" />
+            <End Role="ar_cliente" EntitySet="ar_clientes" />
+          </AssociationSet>
+          <AssociationSet Name="ie_subcat_ar_invdetail" Association="Model.ie_subcat_ar_invdetail">
+            <End Role="ie_subcat" EntitySet="ie_subcats" />
+            <End Role="ar_invdetail" EntitySet="ar_invdetails" />
+          </AssociationSet>
+          <AssociationSet Name="ar_ccliente_ar_invoice" Association="Model.ar_ccliente_ar_invoice">
+            <End Role="ar_ccliente" EntitySet="ar_cclientes" />
+            <End Role="ar_invoice" EntitySet="ar_invoices" />
+          </AssociationSet>
+          <AssociationSet Name="ar_clientear_invoice" Association="Model.ar_clientear_invoice">
+            <End Role="ar_cliente" EntitySet="ar_clientes" />
+            <End Role="ar_invoice" EntitySet="ar_invoices" />
+          </AssociationSet>
+          </EntityContainer>
+        <EntityType Name="gl_option">
+          <Key>
+            <PropertyRef Name="IdEdif" />
+          </Key>
+          <Property Name="IdEdif" Type="Int32" Nullable="false" />
+          <Property Name="AcctMask" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AcctMaskDelimiter" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="AcctNoSize" Type="Byte" Nullable="false" />
+          <Property Name="UserCreated" Type="Int32" Nullable="false" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="UserUpdated" Type="Int32" />
+          <Property Name="DateUpdated" Type="DateTime" Precision="0" />
+          <Property Name="NextVoucherNo" Type="Int16" Nullable="false" />
+          <NavigationProperty Name="GlVouchers" Relationship="Model.gl_option_gl_voucher" FromRole="gl_option" ToRole="gl_voucher" />
+          <NavigationProperty Name="GlNaturalAccts" Relationship="Model.gl_option_gl_natural_acct" FromRole="gl_option" ToRole="gl_natural_acct" />
+        </EntityType>
+        <EntityType Name="gl_natural_acct">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NaturalAcctNo" Type="String" Nullable="false" MaxLength="5" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IdAcctCat" Type="Int32" Nullable="false" />
+          <Property Name="IdEdif" Type="Int32" Nullable="false" />
+          <Property Name="UserCreated" Type="Int32" Nullable="false" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="UserUpdated" Type="Int32" />
+          <Property Name="DateUpdated" Type="DateTime" Precision="0" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="GlOption" Relationship="Model.gl_option_gl_natural_acct" FromRole="gl_natural_acct" ToRole="gl_option" />
+          <NavigationProperty Name="GlAccounts" Relationship="Model.gl_natural_acct_gl_account" FromRole="gl_natural_acct" ToRole="gl_account" />
+          <NavigationProperty Name="GlAcctCat" Relationship="Model.gl_acctcat_gl_natural_acct" FromRole="gl_natural_acct" ToRole="gl_acctcat" />
+        </EntityType>
+        <EntityType Name="gl_account">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GlAcctNo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="UserCreated" Type="Int32" Nullable="false" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="UserUpdated" Type="Int32" />
+          <Property Name="DateUpdated" Type="DateTime" Precision="0" />
+          <Property Name="IdNaturalAcct" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="GlTransactions" Relationship="Model.gl_account_gl_transaction" FromRole="gl_account" ToRole="gl_transaction" />
+          <NavigationProperty Name="GlNaturalAcct" Relationship="Model.gl_natural_acct_gl_account" FromRole="gl_account" ToRole="gl_natural_acct" />
+          <NavigationProperty Name="ArOptions" Relationship="Model.gl_account_ar_option" FromRole="gl_account" ToRole="ar_option" />
+          <NavigationProperty Name="ArCClientes" Relationship="Model.gl_account_ar_ccliente" FromRole="gl_account" ToRole="ar_ccliente" />
+        </EntityType>
+        <EntityType Name="gl_acctcat">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UserCreated" Type="Int32" Nullable="false" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="UserUpdated" Type="Int32" />
+          <Property Name="DateUpdated" Type="DateTime" Precision="0" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="GlNaturalAccts" Relationship="Model.gl_acctcat_gl_natural_acct" FromRole="gl_acctcat" ToRole="gl_natural_acct" />
+        </EntityType>
+        <EntityType Name="gl_voucher">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserCreated" Type="Int32" Nullable="false" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="UserUpdated" Type="Int32" />
+          <Property Name="DateUpdated" Type="DateTime" Precision="0" />
+          <Property Name="IdEdif" Type="Int32" Nullable="false" />
+          <Property Name="TranDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="IdMPeriod" Type="Int32" Nullable="false" />
+          <Property Name="TranKey" Type="Int32" Nullable="false" />
+          <Property Name="IsCancel" Type="Boolean" Nullable="false" />
+          <Property Name="DateCanceled" Type="DateTime" Precision="0" />
+          <Property Name="VoucherId" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Cmnt" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="TranType" Type="Byte" Nullable="false" />
+          <Property Name="Modulo" Type="String" Nullable="false" MaxLength="2" FixedLength="true" Unicode="true" />
+          <Property Name="VoucherNo" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="GlOption" Relationship="Model.gl_option_gl_voucher" FromRole="gl_voucher" ToRole="gl_option" />
+          <NavigationProperty Name="GlTransactions" Relationship="Model.gl_voucher_gl_transaction" FromRole="gl_voucher" ToRole="gl_transaction" />
+        </EntityType>
+        <EntityType Name="gl_transaction">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdGlAcct" Type="Int32" Nullable="false" />
+          <Property Name="TranAmt" Type="Decimal" Nullable="false" Precision="19" Scale="2" />
+          <Property Name="Cmnt" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="TranId" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="SubTranType" Type="Byte" Nullable="false" />
+          <Property Name="IdVoucher" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="GlAccount" Relationship="Model.gl_account_gl_transaction" FromRole="gl_transaction" ToRole="gl_account" />
+          <NavigationProperty Name="GlVoucher" Relationship="Model.gl_voucher_gl_transaction" FromRole="gl_transaction" ToRole="gl_voucher" />
+        </EntityType>
+        <Association Name="gl_option_gl_voucher">
+          <End Type="Model.gl_option" Role="gl_option" Multiplicity="1" />
+          <End Type="Model.gl_voucher" Role="gl_voucher" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="gl_option">
+              <PropertyRef Name="IdEdif" />
+            </Principal>
+            <Dependent Role="gl_voucher">
+              <PropertyRef Name="IdEdif" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="gl_option_gl_natural_acct">
+          <End Type="Model.gl_option" Role="gl_option" Multiplicity="1" />
+          <End Type="Model.gl_natural_acct" Role="gl_natural_acct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="gl_option">
+              <PropertyRef Name="IdEdif" />
+            </Principal>
+            <Dependent Role="gl_natural_acct">
+              <PropertyRef Name="IdEdif" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="gl_account_gl_transaction">
+          <End Type="Model.gl_account" Role="gl_account" Multiplicity="1" />
+          <End Type="Model.gl_transaction" Role="gl_transaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="gl_account">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="gl_transaction">
+              <PropertyRef Name="IdGlAcct" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="gl_natural_acct_gl_account">
+          <End Type="Model.gl_natural_acct" Role="gl_natural_acct" Multiplicity="1" />
+          <End Type="Model.gl_account" Role="gl_account" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="gl_natural_acct">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="gl_account">
+              <PropertyRef Name="IdNaturalAcct" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="gl_acctcat_gl_natural_acct">
+          <End Type="Model.gl_acctcat" Role="gl_acctcat" Multiplicity="1" />
+          <End Type="Model.gl_natural_acct" Role="gl_natural_acct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="gl_acctcat">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="gl_natural_acct">
+              <PropertyRef Name="IdAcctCat" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="entidad">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Apellidos" Type="String" MaxLength="50" />
+          <Property Name="CodId" Type="String" Nullable="false" MaxLength="13" FixedLength="false" Unicode="true" />
+          <Property Name="IsNatural" Type="Boolean" Nullable="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="Email" Type="String" Nullable="true" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" Nullable="true" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Movil" Type="String" Nullable="true" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="IdPais" Type="Int32" Nullable="false" />
+          <Property Name="IdAdminPropiedades" Type="Int32" Nullable="false" />
+          <Property Name="UserCreated" Type="Int32" Nullable="false" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="UserUpdated" Type="Int32" />
+          <Property Name="DateUpdated" Type="DateTime" Precision="0" />
+          <Property Name="Direccion" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ArClientes" Relationship="Model.entidad_ar_cliente" FromRole="entidad" ToRole="ar_cliente" />
+        </EntityType>
+        <EntityType Name="ar_option">
+          <Key>
+            <PropertyRef Name="IdEdif" />
+          </Key>
+          <Property Name="IdEdif" Type="Int32" Nullable="false" />
+          <Property Name="NextInvcNo" Type="Int32" Nullable="false" />
+          <Property Name="InvcNoSize" Type="Byte" Nullable="false" />
+          <Property Name="UserCreated" Type="Int32" Nullable="false" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="UserUpdated" Type="Int32" />
+          <Property Name="DateUpdated" Type="DateTime" Precision="0" />
+          <Property Name="IdGlAcctAnticipo" Type="Int32" />
+          <NavigationProperty Name="ArCClientes" Relationship="Model.ar_option_ar_ccliente" FromRole="ar_option" ToRole="ar_ccliente" />
+          <NavigationProperty Name="GlAccount" Relationship="Model.gl_account_ar_option" FromRole="ar_option" ToRole="gl_account" />
+        </EntityType>
+        <EntityType Name="ar_ccliente">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ArCClienteCod" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IdEdif" Type="Int32" Nullable="false" />
+          <Property Name="UserCreated" Type="Int32" Nullable="false" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="UserUpdated" Type="Int32" />
+          <Property Name="DateUpdated" Type="DateTime" Precision="0" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="IdGlAcct" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ArOption" Relationship="Model.ar_option_ar_ccliente" FromRole="ar_ccliente" ToRole="ar_option" />
+          <NavigationProperty Name="ArClientes" Relationship="Model.ar_ccliente_ar_cliente" FromRole="ar_ccliente" ToRole="ar_cliente" />
+          <NavigationProperty Name="GlAccount" Relationship="Model.gl_account_ar_ccliente" FromRole="ar_ccliente" ToRole="gl_account" />
+          <NavigationProperty Name="ArInvoices" Relationship="Model.ar_ccliente_ar_invoice" FromRole="ar_ccliente" ToRole="ar_invoice" />
+        </EntityType>
+        <EntityType Name="ar_cliente">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdCCliente" Type="Int32" Nullable="false" />
+          <Property Name="UserCreated" Type="Int32" Nullable="false" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="UserUpdated" Type="Int32" />
+          <Property Name="DateUpdated" Type="DateTime" Precision="0" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="Flag1" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="ArCCliente" Relationship="Model.ar_ccliente_ar_cliente" FromRole="ar_cliente" ToRole="ar_ccliente" />
+          <Property Name="IdEntidad" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Entidad" Relationship="Model.entidad_ar_cliente" FromRole="ar_cliente" ToRole="entidad" />
+          <NavigationProperty Name="ArInvoices" Relationship="Model.ar_clientear_invoice" FromRole="ar_cliente" ToRole="ar_invoice" />
+        </EntityType>
+        <Association Name="ar_option_ar_ccliente">
+          <End Type="Model.ar_option" Role="ar_option" Multiplicity="1" />
+          <End Type="Model.ar_ccliente" Role="ar_ccliente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ar_option">
+              <PropertyRef Name="IdEdif" />
+            </Principal>
+            <Dependent Role="ar_ccliente">
+              <PropertyRef Name="IdEdif" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ar_ccliente_ar_cliente">
+          <End Type="Model.ar_ccliente" Role="ar_ccliente" Multiplicity="1" />
+          <End Type="Model.ar_cliente" Role="ar_cliente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ar_ccliente">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ar_cliente">
+              <PropertyRef Name="IdCCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ie_subcat">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IgEgSubCatCod" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="Concepto" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="IdIgEgCat" Type="Int32" Nullable="false" />
+          <Property Name="ReadOnly" Type="Boolean" Nullable="false" />
+          <Property Name="IdGlAcct" Type="Int32" Nullable="false" />
+          <Property Name="UserCreated" Type="Int32" Nullable="false" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="UserUpdated" Type="Int32" />
+          <Property Name="DateUpdated" Type="DateTime" Precision="0" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="IdClassTax" Type="Int32" />
+          <Property Name="IdClassDeduc" Type="Int32" />
+          <Property Name="Precio" Type="Decimal" Nullable="false" Precision="19" Scale="2" />
+          <Property Name="IsExpense" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="ArInvDetails" Relationship="Model.ie_subcat_ar_invdetail" FromRole="ie_subcat" ToRole="ar_invdetail" />
+        </EntityType>
+        <EntityType Name="ar_invoice">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TranDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="TranType" Type="Byte" Nullable="false" />
+          <Property Name="TranAmt" Type="Decimal" Nullable="false" Precision="19" Scale="2" />
+          <Property Name="Cmnt" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="IdMPeriod" Type="Int32" Nullable="false" />
+          <Property Name="UserCreated" Type="Int32" Nullable="false" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="UserUpdated" Type="Int32" />
+          <Property Name="DateUpdated" Type="DateTime" Precision="0" />
+          <Property Name="IdCliente" Type="Int32" Nullable="false" />
+          <Property Name="IdCCliente" Type="Int32" Nullable="false" />
+          <Property Name="DateCanceled" Type="DateTime" Precision="0" />
+          <Property Name="TaxAmt" Type="Decimal" Nullable="false" Precision="19" Scale="2" />
+          <Property Name="Descount" Type="Decimal" Nullable="false" Precision="19" Scale="2" />
+          <Property Name="IsCancel" Type="Boolean" Nullable="false" />
+          <Property Name="IsPend" Type="Boolean" Nullable="false" />
+          <Property Name="DatePayed" Type="DateTime" Precision="0" />
+          <Property Name="CodId" Type="String" Nullable="false" MaxLength="13" FixedLength="false" Unicode="true" />
+          <Property Name="ANombre" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="TranNo" Type="Int32" Nullable="false" />
+          <Property Name="ToMonth" Type="Byte" Nullable="false" />
+          <Property Name="TranAmtHc" Type="Decimal" Nullable="false" Precision="19" Scale="2" />
+          <Property Name="Direccion" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="EntityType" Type="String" Nullable="false" MaxLength="1" FixedLength="true" />
+          <Property Name="ToYear" Type="Int16" Nullable="false" />
+          <Property Name="SubTotal" Type="Decimal" Nullable="false" Precision="19" Scale="2" />
+          <Property Name="Base0" Type="Decimal" Nullable="false" Precision="19" Scale="2" />
+          <Property Name="BaseIVA" Type="Decimal" Nullable="false" Precision="19" Scale="2" />
+          <Property Name="IVA" Type="Decimal" Nullable="false" Precision="19" Scale="2" />
+          <Property Name="Phone" Type="String" Nullable="true" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ArTaxInvcs" Relationship="Model.ar_invoice_ar_taxinvc" FromRole="ar_invoice" ToRole="ar_taxinvc" />
+          <NavigationProperty Name="ArDeductionInvs" Relationship="Model.ar_invoice_ar_deducinv" FromRole="ar_invoice" ToRole="ar_deducinvc" />
+          <NavigationProperty Name="ArInvDetails" Relationship="Model.ar_invoice_ar_invdetail" FromRole="ar_invoice" ToRole="ar_invdetail" />
+          <NavigationProperty Name="ArCCliente" Relationship="Model.ar_ccliente_ar_invoice" FromRole="ar_invoice" ToRole="ar_ccliente" />
+          <NavigationProperty Name="ArCliente" Relationship="Model.ar_clientear_invoice" FromRole="ar_invoice" ToRole="ar_cliente" />
+        </EntityType>
+        <EntityType Name="ar_taxinvc">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdInvoice" Type="Int32" Nullable="false" />
+          <Property Name="TaxAmt" Type="Decimal" Nullable="false" Precision="19" Scale="2" />
+          <Property Name="IsPercentage" Type="Boolean" Nullable="false" />
+          <Property Name="Valor" Type="Decimal" Nullable="false" Precision="19" Scale="2" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsIva" Type="Boolean" Nullable="false" />
+          <Property Name="Base" Type="Decimal" Nullable="false" Precision="19" Scale="2" />
+          <NavigationProperty Name="ArInvoice" Relationship="Model.ar_invoice_ar_taxinvc" FromRole="ar_taxinvc" ToRole="ar_invoice" />
+        </EntityType>
+        <EntityType Name="ar_deducinvc">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdInvoice" Type="Int32" Nullable="false" />
+          <Property Name="DeducAmt" Type="Decimal" Nullable="false" Precision="19" Scale="2" />
+          <Property Name="IsPercentage" Type="Boolean" Nullable="false" />
+          <Property Name="Valor" Type="Decimal" Nullable="false" Precision="19" Scale="2" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsPtoPago" Type="Boolean" Nullable="false" />
+          <Property Name="Base" Type="Decimal" Nullable="false" Precision="19" Scale="2" />
+          <NavigationProperty Name="ArInvoice" Relationship="Model.ar_invoice_ar_deducinv" FromRole="ar_deducinvc" ToRole="ar_invoice" />
+        </EntityType>
+        <EntityType Name="ar_invdetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdInvoice" Type="Int32" Nullable="false" />
+          <Property Name="IdIgEgSubCat" Type="Int32" Nullable="false" />
+          <Property Name="Valor" Type="Decimal" Nullable="false" Precision="19" Scale="2" />
+          <Property Name="Descount" Type="Decimal" Nullable="false" Precision="19" Scale="2" />
+          <Property Name="TaxAmt" Type="Decimal" Nullable="false" Precision="19" Scale="2" />
+          <Property Name="Base" Type="Decimal" Nullable="false" Precision="19" Scale="2" />
+          <Property Name="Precio" Type="Decimal" Nullable="false" Precision="19" Scale="2" />
+          <Property Name="Qty" Type="Decimal" Nullable="false" Precision="19" Scale="2" />
+          <NavigationProperty Name="ArInvoice" Relationship="Model.ar_invoice_ar_invdetail" FromRole="ar_invdetail" ToRole="ar_invoice" />
+          <NavigationProperty Name="IgEgSubCat" Relationship="Model.ie_subcat_ar_invdetail" FromRole="ar_invdetail" ToRole="ie_subcat" />
+        </EntityType>
+        <Association Name="ar_invoice_ar_taxinvc">
+          <End Type="Model.ar_invoice" Role="ar_invoice" Multiplicity="1" />
+          <End Type="Model.ar_taxinvc" Role="ar_taxinvc" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ar_invoice">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ar_taxinvc">
+              <PropertyRef Name="IdInvoice" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ar_invoice_ar_deducinv">
+          <End Type="Model.ar_invoice" Role="ar_invoice" Multiplicity="1" />
+          <End Type="Model.ar_deducinvc" Role="ar_deducinvc" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ar_invoice">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ar_deducinvc">
+              <PropertyRef Name="IdInvoice" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ar_invoice_ar_invdetail">
+          <End Type="Model.ar_invoice" Role="ar_invoice" Multiplicity="1" />
+          <End Type="Model.ar_invdetail" Role="ar_invdetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ar_invoice">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ar_invdetail">
+              <PropertyRef Name="IdInvoice" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="gl_voucher_gl_transaction">
+          <End Type="Model.gl_voucher" Role="gl_voucher" Multiplicity="1" >
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="Model.gl_transaction" Role="gl_transaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="gl_voucher">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="gl_transaction">
+              <PropertyRef Name="IdVoucher" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="gl_account_ar_option">
+          <End Type="Model.gl_account" Role="gl_account" Multiplicity="0..1" >
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="Model.ar_option" Role="ar_option" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="gl_account">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ar_option">
+              <PropertyRef Name="IdGlAcctAnticipo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="gl_account_ar_ccliente">
+          <End Type="Model.gl_account" Role="gl_account" Multiplicity="1" >
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="Model.ar_ccliente" Role="ar_ccliente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="gl_account">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ar_ccliente">
+              <PropertyRef Name="IdGlAcct" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="entidad_ar_cliente">
+          <End Type="Model.entidad" Role="entidad" Multiplicity="1" >
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="Model.ar_cliente" Role="ar_cliente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="entidad">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ar_cliente">
+              <PropertyRef Name="IdEntidad" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ie_subcat_ar_invdetail">
+          <End Type="Model.ie_subcat" Role="ie_subcat" Multiplicity="1" />
+          <End Type="Model.ar_invdetail" Role="ar_invdetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ie_subcat">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ar_invdetail">
+              <PropertyRef Name="IdIgEgSubCat" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ar_ccliente_ar_invoice">
+          <End Type="Model.ar_ccliente" Role="ar_ccliente" Multiplicity="1" />
+          <End Type="Model.ar_invoice" Role="ar_invoice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ar_ccliente">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ar_invoice">
+              <PropertyRef Name="IdCCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ar_clientear_invoice">
+          <End Type="Model.ar_cliente" Role="ar_cliente" Multiplicity="1" />
+          <End Type="Model.ar_invoice" Role="ar_invoice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ar_cliente">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ar_invoice">
+              <PropertyRef Name="IdCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="DefaultContext">
+    <EntitySetMapping Name="gl_options">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.gl_option)">
+        <MappingFragment StoreEntitySet="gl_options">
+          <ScalarProperty Name="IdEdif" ColumnName="IdEdif" />
+          <ScalarProperty Name="AcctMask" ColumnName="AcctMask" />
+          <ScalarProperty Name="AcctMaskDelimiter" ColumnName="AcctMaskDelimiter" />
+          <ScalarProperty Name="AcctNoSize" ColumnName="AcctNoSize" />
+          <ScalarProperty Name="UserCreated" ColumnName="UserCreated" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="UserUpdated" ColumnName="UserUpdated" />
+          <ScalarProperty Name="DateUpdated" ColumnName="DateUpdated" />
+          <ScalarProperty Name="NextVoucherNo" ColumnName="NextVoucherNo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="gl_natural_accts">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.gl_natural_acct)">
+        <MappingFragment StoreEntitySet="gl_natural_accts">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="NaturalAcctNo" ColumnName="NaturalAcctNo" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="IdAcctCat" ColumnName="IdAcctCat" />
+          <ScalarProperty Name="IdEdif" ColumnName="IdEdif" />
+          <ScalarProperty Name="UserCreated" ColumnName="UserCreated" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="UserUpdated" ColumnName="UserUpdated" />
+          <ScalarProperty Name="DateUpdated" ColumnName="DateUpdated" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="gl_accounts">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.gl_account)">
+        <MappingFragment StoreEntitySet="gl_accounts">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="GlAcctNo" ColumnName="GlAcctNo" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="UserCreated" ColumnName="UserCreated" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="UserUpdated" ColumnName="UserUpdated" />
+          <ScalarProperty Name="DateUpdated" ColumnName="DateUpdated" />
+          <ScalarProperty Name="IdNaturalAcct" ColumnName="IdNaturalAcct" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="gl_acctcats">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.gl_acctcat)">
+        <MappingFragment StoreEntitySet="gl_acctcats">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="UserCreated" ColumnName="UserCreated" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="UserUpdated" ColumnName="UserUpdated" />
+          <ScalarProperty Name="DateUpdated" ColumnName="DateUpdated" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="gl_vouchers">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.gl_voucher)">
+        <MappingFragment StoreEntitySet="gl_vouchers">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="UserCreated" ColumnName="UserCreated" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="UserUpdated" ColumnName="UserUpdated" />
+          <ScalarProperty Name="DateUpdated" ColumnName="DateUpdated" />
+          <ScalarProperty Name="IdEdif" ColumnName="IdEdif" />
+          <ScalarProperty Name="TranDate" ColumnName="TranDate" />
+          <ScalarProperty Name="IdMPeriod" ColumnName="IdMPeriod" />
+          <ScalarProperty Name="TranKey" ColumnName="TranKey" />
+          <ScalarProperty Name="IsCancel" ColumnName="IsCancel" />
+          <ScalarProperty Name="DateCanceled" ColumnName="DateCanceled" />
+          <ScalarProperty Name="VoucherId" ColumnName="VoucherId" />
+          <ScalarProperty Name="Cmnt" ColumnName="Cmnt" />
+          <ScalarProperty Name="TranType" ColumnName="TranType" />
+          <ScalarProperty Name="Modulo" ColumnName="Modulo" />
+          <ScalarProperty Name="VoucherNo" ColumnName="VoucherNo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="gl_transactions">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.gl_transaction)">
+        <MappingFragment StoreEntitySet="gl_transactions">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="IdGlAcct" ColumnName="IdGlAcct" />
+          <ScalarProperty Name="TranAmt" ColumnName="TranAmt" />
+          <ScalarProperty Name="Cmnt" ColumnName="Cmnt" />
+          <ScalarProperty Name="TranId" ColumnName="TranId" />
+          <ScalarProperty Name="SubTranType" ColumnName="SubTranType" />
+          <ScalarProperty Name="IdVoucher" ColumnName="IdVoucher" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="entidades">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.entidad)">
+        <MappingFragment StoreEntitySet="entidades">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Apellidos" ColumnName="Apellidos" />
+          <ScalarProperty Name="CodId" ColumnName="CodId" />
+          <ScalarProperty Name="IsNatural" ColumnName="IsNatural" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="Movil" ColumnName="Movil" />
+          <ScalarProperty Name="IdPais" ColumnName="IdPais" />
+          <ScalarProperty Name="IdAdminPropiedades" ColumnName="IdAdminPropiedades" />
+          <ScalarProperty Name="UserCreated" ColumnName="UserCreated" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="UserUpdated" ColumnName="UserUpdated" />
+          <ScalarProperty Name="DateUpdated" ColumnName="DateUpdated" />
+          <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ar_options">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.ar_option)">
+        <MappingFragment StoreEntitySet="ar_options">
+          <ScalarProperty Name="IdEdif" ColumnName="IdEdif" />
+          <ScalarProperty Name="NextInvcNo" ColumnName="NextInvcNo" />
+          <ScalarProperty Name="InvcNoSize" ColumnName="InvcNoSize" />
+          <ScalarProperty Name="UserCreated" ColumnName="UserCreated" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="UserUpdated" ColumnName="UserUpdated" />
+          <ScalarProperty Name="DateUpdated" ColumnName="DateUpdated" />
+          <ScalarProperty Name="IdGlAcctAnticipo" ColumnName="IdGlAcctAnticipo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ar_cclientes">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.ar_ccliente)">
+        <MappingFragment StoreEntitySet="ar_cclientes">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="ArCClienteCod" ColumnName="ArCClienteCod" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="IdEdif" ColumnName="IdEdif" />
+          <ScalarProperty Name="UserCreated" ColumnName="UserCreated" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="UserUpdated" ColumnName="UserUpdated" />
+          <ScalarProperty Name="DateUpdated" ColumnName="DateUpdated" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="IdGlAcct" ColumnName="IdGlAcct" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ar_clientes">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.ar_cliente)">
+        <MappingFragment StoreEntitySet="ar_clientes">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="IdCCliente" ColumnName="IdCCliente" />
+          <ScalarProperty Name="UserCreated" ColumnName="UserCreated" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="UserUpdated" ColumnName="UserUpdated" />
+          <ScalarProperty Name="DateUpdated" ColumnName="DateUpdated" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="Flag1" ColumnName="Flag1" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ie_subcats">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.ie_subcat)">
+        <MappingFragment StoreEntitySet="ie_subcats">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="IgEgSubCatCod" ColumnName="IgEgSubCatCod" />
+          <ScalarProperty Name="Concepto" ColumnName="Concepto" />
+          <ScalarProperty Name="IdIgEgCat" ColumnName="IdIgEgCat" />
+          <ScalarProperty Name="ReadOnly" ColumnName="ReadOnly" />
+          <ScalarProperty Name="IdGlAcct" ColumnName="IdGlAcct" />
+          <ScalarProperty Name="UserCreated" ColumnName="UserCreated" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="UserUpdated" ColumnName="UserUpdated" />
+          <ScalarProperty Name="DateUpdated" ColumnName="DateUpdated" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="IdClassTax" ColumnName="IdClassTax" />
+          <ScalarProperty Name="IdClassDeduc" ColumnName="IdClassDeduc" />
+          <ScalarProperty Name="Precio" ColumnName="Precio" />
+          <ScalarProperty Name="IsExpense" ColumnName="IsExpense" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ar_invoices">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.ar_invoice)">
+        <MappingFragment StoreEntitySet="ar_invoices">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="TranDate" ColumnName="TranDate" />
+          <ScalarProperty Name="TranType" ColumnName="TranType" />
+          <ScalarProperty Name="TranAmt" ColumnName="TranAmt" />
+          <ScalarProperty Name="Cmnt" ColumnName="Cmnt" />
+          <ScalarProperty Name="IdMPeriod" ColumnName="IdMPeriod" />
+          <ScalarProperty Name="UserCreated" ColumnName="UserCreated" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="UserUpdated" ColumnName="UserUpdated" />
+          <ScalarProperty Name="DateUpdated" ColumnName="DateUpdated" />
+          <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
+          <ScalarProperty Name="IdCCliente" ColumnName="IdCCliente" />
+          <ScalarProperty Name="DateCanceled" ColumnName="DateCanceled" />
+          <ScalarProperty Name="TaxAmt" ColumnName="TaxAmt" />
+          <ScalarProperty Name="Descount" ColumnName="Descount" />
+          <ScalarProperty Name="IsCancel" ColumnName="IsCancel" />
+          <ScalarProperty Name="IsPend" ColumnName="IsPend" />
+          <ScalarProperty Name="DatePayed" ColumnName="DatePayed" />
+          <ScalarProperty Name="CodId" ColumnName="CodId" />
+          <ScalarProperty Name="ANombre" ColumnName="ANombre" />
+          <ScalarProperty Name="TranNo" ColumnName="TranNo" />
+          <ScalarProperty Name="ToMonth" ColumnName="ToMonth" />
+          <ScalarProperty Name="TranAmtHc" ColumnName="TranAmtHc" />
+          <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+          <ScalarProperty Name="EntityType" ColumnName="EntityType" />
+          <ScalarProperty Name="ToYear" ColumnName="ToYear" />
+          <ScalarProperty Name="SubTotal" ColumnName="SubTotal" />
+          <ScalarProperty Name="Base0" ColumnName="Base0" />
+          <ScalarProperty Name="BaseIVA" ColumnName="BaseIVA" />
+          <ScalarProperty Name="IVA" ColumnName="IVA" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ar_taxinvcs">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.ar_taxinvc)">
+        <MappingFragment StoreEntitySet="ar_taxinvcs">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="IdInvoice" ColumnName="IdInvoice" />
+          <ScalarProperty Name="TaxAmt" ColumnName="TaxAmt" />
+          <ScalarProperty Name="IsPercentage" ColumnName="IsPercentage" />
+          <ScalarProperty Name="Valor" ColumnName="Valor" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="IsIva" ColumnName="IsIva" />
+          <ScalarProperty Name="Base" ColumnName="Base" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ar_deducinvcs">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.ar_deducinvc)">
+        <MappingFragment StoreEntitySet="ar_deducinvcs">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="IdInvoice" ColumnName="IdInvoice" />
+          <ScalarProperty Name="DeducAmt" ColumnName="DeducAmt" />
+          <ScalarProperty Name="IsPercentage" ColumnName="IsPercentage" />
+          <ScalarProperty Name="Valor" ColumnName="Valor" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="IsPtoPago" ColumnName="IsPtoPago" />
+          <ScalarProperty Name="Base" ColumnName="Base" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ar_invdetails">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.ar_invdetail)">
+        <MappingFragment StoreEntitySet="ar_invdetails">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="IdInvoice" ColumnName="IdInvoice" />
+          <ScalarProperty Name="IdIgEgSubCat" ColumnName="IdIgEgSubCat" />
+          <ScalarProperty Name="Valor" ColumnName="Valor" />
+          <ScalarProperty Name="Descount" ColumnName="Descount" />
+          <ScalarProperty Name="TaxAmt" ColumnName="TaxAmt" />
+          <ScalarProperty Name="Base" ColumnName="Base" />
+          <ScalarProperty Name="Precio" ColumnName="Precio" />
+          <ScalarProperty Name="Qty" ColumnName="Qty" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+          </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

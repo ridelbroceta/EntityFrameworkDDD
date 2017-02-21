@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="b1aa844aeab149e695c2a5102df61f02" Name="GL" ZoomLevel="101" >
+        <EntityTypeShape EntityType="Model.gl_option" Width="1.875" PointX="0.5" PointY="0.5" />
+        <EntityTypeShape EntityType="Model.gl_natural_acct" Width="1.5" PointX="2.875" PointY="0.75" />
+        <EntityTypeShape EntityType="Model.gl_account" Width="1.5" PointX="5" PointY="0.875" />
+        <EntityTypeShape EntityType="Model.gl_acctcat" Width="1.5" PointX="2.5" PointY="5.25" />
+        <EntityTypeShape EntityType="Model.gl_voucher" Width="1.5" PointX="7.625" PointY="2.25" />
+        <EntityTypeShape EntityType="Model.gl_transaction" Width="1.5" PointX="10.875" PointY="0.625" />
+        <AssociationConnector Association="Model.gl_option_gl_voucher" />
+        <AssociationConnector Association="Model.gl_option_gl_natural_acct" />
+        <AssociationConnector Association="Model.gl_account_gl_transaction" />
+        <AssociationConnector Association="Model.gl_natural_acct_gl_account" />
+        <AssociationConnector Association="Model.gl_acctcat_gl_natural_acct" />
+        <AssociationConnector Association="Model.gl_voucher_gl_transaction" />
+      </Diagram>
+      <Diagram DiagramId="de48bef714e7486d8e1a88828b64ef4e" Name="AR" ZoomLevel="82" >
+        <EntityTypeShape EntityType="Model.entidad" Width="2.125" PointX="11.125" PointY="5.75" />
+        <EntityTypeShape EntityType="Model.ar_option" Width="1.5" PointX="5.875" PointY="0.75" />
+        <EntityTypeShape EntityType="Model.ar_ccliente" Width="1.5" PointX="8.75" PointY="0.625" />
+        <EntityTypeShape EntityType="Model.ar_cliente" Width="1.5" PointX="11.375" PointY="0.75" />
+        <AssociationConnector Association="Model.ar_option_ar_ccliente" />
+        <AssociationConnector Association="Model.ar_ccliente_ar_cliente" />
+        <EntityTypeShape EntityType="Model.gl_account" Width="1.5" PointX="2.75" PointY="0.5" />
+        <AssociationConnector Association="Model.gl_account_ar_option" />
+        <AssociationConnector Association="Model.gl_account_ar_ccliente" />
+        <AssociationConnector Association="Model.entidad_ar_cliente" />
+      </Diagram>
+      <Diagram DiagramId="124a5767c8bc49a9b245d166ca398b14" Name="AR Invoice" ZoomLevel="82" >
+        <EntityTypeShape EntityType="Model.ie_subcat" Width="2" PointX="16.75" PointY="0.75" />
+        <EntityTypeShape EntityType="Model.ar_invoice" Width="1.5" PointX="9" PointY="0.625" />
+        <EntityTypeShape EntityType="Model.ar_taxinvc" Width="1.5" PointX="12.5" PointY="6.125" />
+        <EntityTypeShape EntityType="Model.ar_deducinvc" Width="1.5" PointX="4.125" PointY="5.875" />
+        <EntityTypeShape EntityType="Model.ar_invdetail" Width="1.5" PointX="12.625" PointY="0.625" />
+        <AssociationConnector Association="Model.ar_invoice_ar_taxinvc" />
+        <AssociationConnector Association="Model.ar_invoice_ar_deducinv" />
+        <AssociationConnector Association="Model.ar_invoice_ar_invdetail" />
+        <AssociationConnector Association="Model.ie_subcat_ar_invdetail" />
+        <EntityTypeShape EntityType="Model.ar_ccliente" Width="1.5" PointX="1.125" PointY="0.5" />
+        <EntityTypeShape EntityType="Model.ar_cliente" Width="1.5" PointX="3.625" PointY="0.5" />
+        <AssociationConnector Association="Model.ar_ccliente_ar_cliente" />
+        <AssociationConnector Association="Model.ar_ccliente_ar_invoice" />
+        <AssociationConnector Association="Model.ar_clientear_invoice" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

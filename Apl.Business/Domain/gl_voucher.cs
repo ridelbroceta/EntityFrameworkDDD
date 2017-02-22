@@ -9,33 +9,25 @@
 //------------------------------------------------------------------------------
 
 
-namespace Apl.Data.Model
+namespace Apl.Business.Domain
 {
 
 using System;
     using System.Collections.Generic;
     
-public partial class gl_option
+public partial class gl_voucher
 {
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-    public gl_option()
+    public gl_voucher()
     {
 
-        this.GlVouchers = new HashSet<gl_voucher>();
-
-        this.GlNaturalAccts = new HashSet<gl_natural_acct>();
+        this.GlTransactions = new HashSet<gl_transaction>();
 
     }
 
 
-    public int IdEdif { get; set; }
-
-    public string AcctMask { get; set; }
-
-    public string AcctMaskDelimiter { get; set; }
-
-    public byte AcctNoSize { get; set; }
+    public int Id { get; set; }
 
     public int UserCreated { get; set; }
 
@@ -45,17 +37,35 @@ public partial class gl_option
 
     public Nullable<System.DateTime> DateUpdated { get; set; }
 
-    public short NextVoucherNo { get; set; }
+    public int IdEdif { get; set; }
+
+    public System.DateTime TranDate { get; set; }
+
+    public int IdMPeriod { get; set; }
+
+    public int TranKey { get; set; }
+
+    public bool IsCancel { get; set; }
+
+    public Nullable<System.DateTime> DateCanceled { get; set; }
+
+    public string VoucherId { get; set; }
+
+    public string Cmnt { get; set; }
+
+    public byte TranType { get; set; }
+
+    public string Modulo { get; set; }
+
+    public int VoucherNo { get; set; }
 
 
+
+    public virtual gl_option GlOption { get; set; }
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
-    public virtual ICollection<gl_voucher> GlVouchers { get; set; }
-
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-
-    public virtual ICollection<gl_natural_acct> GlNaturalAccts { get; set; }
+    public virtual ICollection<gl_transaction> GlTransactions { get; set; }
 
 }
 

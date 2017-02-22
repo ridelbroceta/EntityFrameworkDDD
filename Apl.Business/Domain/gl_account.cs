@@ -9,27 +9,35 @@
 //------------------------------------------------------------------------------
 
 
-namespace Apl.Data.Model
+namespace Apl.Business.Domain
 {
 
 using System;
     using System.Collections.Generic;
     
-public partial class gl_acctcat
+public partial class gl_account
 {
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-    public gl_acctcat()
+    public gl_account()
     {
 
-        this.GlNaturalAccts = new HashSet<gl_natural_acct>();
+        this.GlTransactions = new HashSet<gl_transaction>();
+
+        this.ArOptions = new HashSet<ar_option>();
+
+        this.ArCClientes = new HashSet<ar_ccliente>();
 
     }
 
 
     public int Id { get; set; }
 
+    public string GlAcctNo { get; set; }
+
     public string Nombre { get; set; }
+
+    public bool IsActive { get; set; }
 
     public int UserCreated { get; set; }
 
@@ -39,13 +47,23 @@ public partial class gl_acctcat
 
     public Nullable<System.DateTime> DateUpdated { get; set; }
 
-    public bool IsActive { get; set; }
+    public int IdNaturalAcct { get; set; }
 
 
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
-    public virtual ICollection<gl_natural_acct> GlNaturalAccts { get; set; }
+    public virtual ICollection<gl_transaction> GlTransactions { get; set; }
+
+    public virtual gl_natural_acct GlNaturalAcct { get; set; }
+
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+
+    public virtual ICollection<ar_option> ArOptions { get; set; }
+
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+
+    public virtual ICollection<ar_ccliente> ArCClientes { get; set; }
 
 }
 

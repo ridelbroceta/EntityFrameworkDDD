@@ -9,38 +9,34 @@
 //------------------------------------------------------------------------------
 
 
-namespace Apl.Data.Model
+namespace Apl.Business.Domain
 {
 
 using System;
     using System.Collections.Generic;
     
-public partial class ar_invdetail
+public partial class ar_taxinvc
 {
 
     public int Id { get; set; }
 
     public int IdInvoice { get; set; }
 
-    public int IdIgEgSubCat { get; set; }
+    public decimal TaxAmt { get; set; }
+
+    public bool IsPercentage { get; set; }
 
     public decimal Valor { get; set; }
 
-    public decimal Descount { get; set; }
+    public string Nombre { get; set; }
 
-    public decimal TaxAmt { get; set; }
+    public bool IsIva { get; set; }
 
     public decimal Base { get; set; }
-
-    public decimal Precio { get; set; }
-
-    public decimal Qty { get; set; }
 
 
 
     public virtual ar_invoice ArInvoice { get; set; }
-
-    public virtual ie_subcat IgEgSubCat { get; set; }
 
 }
 

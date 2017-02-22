@@ -9,35 +9,29 @@
 //------------------------------------------------------------------------------
 
 
-namespace Apl.Data.Model
+namespace Apl.Business.Domain
 {
 
 using System;
     using System.Collections.Generic;
     
-public partial class ie_subcat
+public partial class ar_option
 {
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-    public ie_subcat()
+    public ar_option()
     {
 
-        this.ArInvDetails = new HashSet<ar_invdetail>();
+        this.ArCClientes = new HashSet<ar_ccliente>();
 
     }
 
 
-    public int Id { get; set; }
+    public int IdEdif { get; set; }
 
-    public string IgEgSubCatCod { get; set; }
+    public int NextInvcNo { get; set; }
 
-    public string Concepto { get; set; }
-
-    public int IdIgEgCat { get; set; }
-
-    public bool ReadOnly { get; set; }
-
-    public int IdGlAcct { get; set; }
+    public byte InvcNoSize { get; set; }
 
     public int UserCreated { get; set; }
 
@@ -47,21 +41,15 @@ public partial class ie_subcat
 
     public Nullable<System.DateTime> DateUpdated { get; set; }
 
-    public bool IsActive { get; set; }
-
-    public Nullable<int> IdClassTax { get; set; }
-
-    public Nullable<int> IdClassDeduc { get; set; }
-
-    public decimal Precio { get; set; }
-
-    public bool IsExpense { get; set; }
+    public Nullable<int> IdGlAcctAnticipo { get; set; }
 
 
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
-    public virtual ICollection<ar_invdetail> ArInvDetails { get; set; }
+    public virtual ICollection<ar_ccliente> ArCClientes { get; set; }
+
+    public virtual gl_account GlAccount { get; set; }
 
 }
 

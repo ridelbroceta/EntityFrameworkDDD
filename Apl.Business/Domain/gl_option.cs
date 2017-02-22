@@ -9,33 +9,33 @@
 //------------------------------------------------------------------------------
 
 
-namespace Apl.Data.Model
+namespace Apl.Business.Domain
 {
 
 using System;
     using System.Collections.Generic;
     
-public partial class ar_ccliente
+public partial class gl_option
 {
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-    public ar_ccliente()
+    public gl_option()
     {
 
-        this.ArClientes = new HashSet<ar_cliente>();
+        this.GlVouchers = new HashSet<gl_voucher>();
 
-        this.ArInvoices = new HashSet<ar_invoice>();
+        this.GlNaturalAccts = new HashSet<gl_natural_acct>();
 
     }
 
 
-    public int Id { get; set; }
-
-    public string ArCClienteCod { get; set; }
-
-    public string Nombre { get; set; }
-
     public int IdEdif { get; set; }
+
+    public string AcctMask { get; set; }
+
+    public string AcctMaskDelimiter { get; set; }
+
+    public byte AcctNoSize { get; set; }
 
     public int UserCreated { get; set; }
 
@@ -45,23 +45,17 @@ public partial class ar_ccliente
 
     public Nullable<System.DateTime> DateUpdated { get; set; }
 
-    public bool IsActive { get; set; }
-
-    public int IdGlAcct { get; set; }
+    public short NextVoucherNo { get; set; }
 
 
-
-    public virtual ar_option ArOption { get; set; }
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
-    public virtual ICollection<ar_cliente> ArClientes { get; set; }
-
-    public virtual gl_account GlAccount { get; set; }
+    public virtual ICollection<gl_voucher> GlVouchers { get; set; }
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
-    public virtual ICollection<ar_invoice> ArInvoices { get; set; }
+    public virtual ICollection<gl_natural_acct> GlNaturalAccts { get; set; }
 
 }
 

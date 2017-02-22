@@ -9,33 +9,35 @@
 //------------------------------------------------------------------------------
 
 
-namespace Apl.Data.Model
+namespace Apl.Business.Domain
 {
 
 using System;
     using System.Collections.Generic;
     
-public partial class gl_natural_acct
+public partial class ie_subcat
 {
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-    public gl_natural_acct()
+    public ie_subcat()
     {
 
-        this.GlAccounts = new HashSet<gl_account>();
+        this.ArInvDetails = new HashSet<ar_invdetail>();
 
     }
 
 
     public int Id { get; set; }
 
-    public string NaturalAcctNo { get; set; }
+    public string IgEgSubCatCod { get; set; }
 
-    public string Nombre { get; set; }
+    public string Concepto { get; set; }
 
-    public int IdAcctCat { get; set; }
+    public int IdIgEgCat { get; set; }
 
-    public int IdEdif { get; set; }
+    public bool ReadOnly { get; set; }
+
+    public int IdGlAcct { get; set; }
 
     public int UserCreated { get; set; }
 
@@ -47,15 +49,19 @@ public partial class gl_natural_acct
 
     public bool IsActive { get; set; }
 
+    public Nullable<int> IdClassTax { get; set; }
+
+    public Nullable<int> IdClassDeduc { get; set; }
+
+    public decimal Precio { get; set; }
+
+    public bool IsExpense { get; set; }
 
 
-    public virtual gl_option GlOption { get; set; }
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
-    public virtual ICollection<gl_account> GlAccounts { get; set; }
-
-    public virtual gl_acctcat GlAcctCat { get; set; }
+    public virtual ICollection<ar_invdetail> ArInvDetails { get; set; }
 
 }
 

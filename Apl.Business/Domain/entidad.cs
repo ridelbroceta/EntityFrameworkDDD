@@ -9,29 +9,45 @@
 //------------------------------------------------------------------------------
 
 
-namespace Apl.Data.Model
+namespace Apl.Business.Domain
 {
 
 using System;
     using System.Collections.Generic;
     
-public partial class ar_option
+public partial class entidad
 {
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-    public ar_option()
+    public entidad()
     {
 
-        this.ArCClientes = new HashSet<ar_ccliente>();
+        this.ArClientes = new HashSet<ar_cliente>();
 
     }
 
 
-    public int IdEdif { get; set; }
+    public int Id { get; set; }
 
-    public int NextInvcNo { get; set; }
+    public string Nombre { get; set; }
 
-    public byte InvcNoSize { get; set; }
+    public string Apellidos { get; set; }
+
+    public string CodId { get; set; }
+
+    public bool IsNatural { get; set; }
+
+    public bool IsActive { get; set; }
+
+    public string Email { get; set; }
+
+    public string Phone { get; set; }
+
+    public string Movil { get; set; }
+
+    public int IdPais { get; set; }
+
+    public int IdAdminPropiedades { get; set; }
 
     public int UserCreated { get; set; }
 
@@ -41,15 +57,13 @@ public partial class ar_option
 
     public Nullable<System.DateTime> DateUpdated { get; set; }
 
-    public Nullable<int> IdGlAcctAnticipo { get; set; }
+    public string Direccion { get; set; }
 
 
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
-    public virtual ICollection<ar_ccliente> ArCClientes { get; set; }
-
-    public virtual gl_account GlAccount { get; set; }
+    public virtual ICollection<ar_cliente> ArClientes { get; set; }
 
 }
 

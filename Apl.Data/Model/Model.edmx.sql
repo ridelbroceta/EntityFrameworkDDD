@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 02/21/2017 13:18:45
+-- Date Created: 02/22/2017 14:01:09
 -- Generated from EDMX file: S:\c#\EntityFrameworkDDD\Apl.Data\Model\Model.edmx
 -- --------------------------------------------------
 
@@ -46,6 +46,27 @@ IF OBJECT_ID(N'[dbo].[FK_ar_invoice_ar_deducinv]', 'F') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[FK_ar_invoice_ar_invdetail]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[ar_invdetails] DROP CONSTRAINT [FK_ar_invoice_ar_invdetail];
+GO
+IF OBJECT_ID(N'[dbo].[FK_gl_voucher_gl_transaction]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[gl_transactions] DROP CONSTRAINT [FK_gl_voucher_gl_transaction];
+GO
+IF OBJECT_ID(N'[dbo].[FK_gl_account_ar_option]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[ar_options] DROP CONSTRAINT [FK_gl_account_ar_option];
+GO
+IF OBJECT_ID(N'[dbo].[FK_gl_account_ar_ccliente]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[ar_cclientes] DROP CONSTRAINT [FK_gl_account_ar_ccliente];
+GO
+IF OBJECT_ID(N'[dbo].[FK_entidad_ar_cliente]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[ar_clientes] DROP CONSTRAINT [FK_entidad_ar_cliente];
+GO
+IF OBJECT_ID(N'[dbo].[FK_ie_subcat_ar_invdetail]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[ar_invdetails] DROP CONSTRAINT [FK_ie_subcat_ar_invdetail];
+GO
+IF OBJECT_ID(N'[dbo].[FK_ar_ccliente_ar_invoice]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[ar_invoices] DROP CONSTRAINT [FK_ar_ccliente_ar_invoice];
+GO
+IF OBJECT_ID(N'[dbo].[FK_ar_clientear_invoice]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[ar_invoices] DROP CONSTRAINT [FK_ar_clientear_invoice];
 GO
 
 -- --------------------------------------------------

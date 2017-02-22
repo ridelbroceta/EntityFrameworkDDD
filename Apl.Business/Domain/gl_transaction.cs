@@ -9,34 +9,34 @@
 //------------------------------------------------------------------------------
 
 
-namespace Apl.Data.Model
+namespace Apl.Business.Domain
 {
 
 using System;
     using System.Collections.Generic;
     
-public partial class ar_deducinvc
+public partial class gl_transaction
 {
 
     public int Id { get; set; }
 
-    public int IdInvoice { get; set; }
+    public int IdGlAcct { get; set; }
 
-    public decimal DeducAmt { get; set; }
+    public decimal TranAmt { get; set; }
 
-    public bool IsPercentage { get; set; }
+    public string Cmnt { get; set; }
 
-    public decimal Valor { get; set; }
+    public string TranId { get; set; }
 
-    public string Nombre { get; set; }
+    public byte SubTranType { get; set; }
 
-    public bool IsPtoPago { get; set; }
-
-    public decimal Base { get; set; }
+    public int IdVoucher { get; set; }
 
 
 
-    public virtual ar_invoice ArInvoice { get; set; }
+    public virtual gl_account GlAccount { get; set; }
+
+    public virtual gl_voucher GlVoucher { get; set; }
 
 }
 

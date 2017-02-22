@@ -61,6 +61,34 @@
       <End Role="ar_invoice" EntitySet="ar_invoices" />
       <End Role="ar_invdetail" EntitySet="ar_invdetails" />
     </AssociationSet>
+    <AssociationSet Name="gl_voucher_gl_transaction" Association="Model.Store.gl_voucher_gl_transaction">
+      <End Role="gl_voucher" EntitySet="gl_vouchers" />
+      <End Role="gl_transaction" EntitySet="gl_transactions" />
+    </AssociationSet>
+    <AssociationSet Name="gl_account_ar_option" Association="Model.Store.gl_account_ar_option">
+      <End Role="gl_account" EntitySet="gl_accounts" />
+      <End Role="ar_option" EntitySet="ar_options" />
+    </AssociationSet>
+    <AssociationSet Name="gl_account_ar_ccliente" Association="Model.Store.gl_account_ar_ccliente">
+      <End Role="gl_account" EntitySet="gl_accounts" />
+      <End Role="ar_ccliente" EntitySet="ar_cclientes" />
+    </AssociationSet>
+    <AssociationSet Name="entidad_ar_cliente" Association="Model.Store.entidad_ar_cliente">
+      <End Role="entidad" EntitySet="entidades" />
+      <End Role="ar_cliente" EntitySet="ar_clientes" />
+    </AssociationSet>
+    <AssociationSet Name="ie_subcat_ar_invdetail" Association="Model.Store.ie_subcat_ar_invdetail">
+      <End Role="ie_subcat" EntitySet="ie_subcats" />
+      <End Role="ar_invdetail" EntitySet="ar_invdetails" />
+    </AssociationSet>
+    <AssociationSet Name="ar_ccliente_ar_invoice" Association="Model.Store.ar_ccliente_ar_invoice">
+      <End Role="ar_ccliente" EntitySet="ar_cclientes" />
+      <End Role="ar_invoice" EntitySet="ar_invoices" />
+    </AssociationSet>
+    <AssociationSet Name="ar_clientear_invoice" Association="Model.Store.ar_clientear_invoice">
+      <End Role="ar_cliente" EntitySet="ar_clientes" />
+      <End Role="ar_invoice" EntitySet="ar_invoices" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="gl_options">
     <Key>
@@ -211,6 +239,7 @@
     <Property Name="DateUpdated" Type="datetime" Nullable="true" />
     <Property Name="IsActive" Type="bit" Nullable="false" />
     <Property Name="Flag1" Type="bit" Nullable="false" />
+    <Property Name="IdEntidad" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="ie_subcats">
     <Key>
@@ -425,6 +454,98 @@
       </Principal>
       <Dependent Role="ar_invdetail">
         <PropertyRef Name="IdInvoice" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="gl_voucher_gl_transaction">
+    <End Role="gl_voucher" Type="Model.Store.gl_vouchers" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="gl_transaction" Type="Model.Store.gl_transactions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="gl_voucher">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="gl_transaction">
+        <PropertyRef Name="IdVoucher" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="gl_account_ar_option">
+    <End Role="gl_account" Type="Model.Store.gl_accounts" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="ar_option" Type="Model.Store.ar_options" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="gl_account">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ar_option">
+        <PropertyRef Name="IdGlAcctAnticipo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="gl_account_ar_ccliente">
+    <End Role="gl_account" Type="Model.Store.gl_accounts" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="ar_ccliente" Type="Model.Store.ar_cclientes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="gl_account">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ar_ccliente">
+        <PropertyRef Name="IdGlAcct" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="entidad_ar_cliente">
+    <End Role="entidad" Type="Model.Store.entidades" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="ar_cliente" Type="Model.Store.ar_clientes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="entidad">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ar_cliente">
+        <PropertyRef Name="IdEntidad" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ie_subcat_ar_invdetail">
+    <End Role="ie_subcat" Type="Model.Store.ie_subcats" Multiplicity="1" />
+    <End Role="ar_invdetail" Type="Model.Store.ar_invdetails" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ie_subcat">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ar_invdetail">
+        <PropertyRef Name="IdIgEgSubCat" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ar_ccliente_ar_invoice">
+    <End Role="ar_ccliente" Type="Model.Store.ar_cclientes" Multiplicity="1" />
+    <End Role="ar_invoice" Type="Model.Store.ar_invoices" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ar_ccliente">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ar_invoice">
+        <PropertyRef Name="IdCCliente" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ar_clientear_invoice">
+    <End Role="ar_cliente" Type="Model.Store.ar_clientes" Multiplicity="1" />
+    <End Role="ar_invoice" Type="Model.Store.ar_invoices" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ar_cliente">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ar_invoice">
+        <PropertyRef Name="IdCliente" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -1173,6 +1294,7 @@
           <ScalarProperty Name="DateUpdated" ColumnName="DateUpdated" />
           <ScalarProperty Name="IsActive" ColumnName="IsActive" />
           <ScalarProperty Name="Flag1" ColumnName="Flag1" />
+          <ScalarProperty Name="IdEntidad" ColumnName="IdEntidad" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -1277,7 +1399,7 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-          </EntityContainerMapping>
+  </EntityContainerMapping>
 </Mapping></edmx:Mappings>
   </edmx:Runtime>
   <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->

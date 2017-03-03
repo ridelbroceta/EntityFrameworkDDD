@@ -10,15 +10,14 @@
 //------------------------------------------------------------------------------
 
 
-namespace Apl.Business.Domain
-{
-
-using System;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
+using Apl.Business.Domain;
 
 
-public partial class DefaultContext : DbContext
+namespace Apl.Data.Model
+{
+    public partial class DefaultContext : DbContext
 {
     public DefaultContext()
         : base("name=DefaultContext")

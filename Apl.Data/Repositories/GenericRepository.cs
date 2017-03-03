@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
-using Apl.Business.Domain;
 using Apl.Business.Repositories;
 using Apl.Business.Specifications;
+using Apl.Data.Model;
 
 namespace Apl.Data.Repositories
 {
@@ -21,10 +21,10 @@ namespace Apl.Data.Repositories
         {
             //…          //set internal values         
             Context = context;
-            this.DbSet = context.Set<TEntity>();
+            DbSet = context.Set<TEntity>();
         }
 
-        //public IContext StoreContext { get { return Context as IContext; } }
+        public DefaultContext StoreContext => Context;
 
         public void Add(TEntity item)
         {
@@ -70,8 +70,8 @@ namespace Apl.Data.Repositories
 
         public IEnumerable<TEntity> GetBySpec(ISpecification<TEntity> specification)
         {
-            if (specification == (ISpecification<TEntity>)null) throw new ArgumentNullException("specification");
-            return DbSet.Where(specification.SatisfiedBy()).AsEnumerable<TEntity>();
+            if (specification == null) throw new ArgumentNullException("specification");
+            return DbSet.Where(specification.SatisfiedBy()).AsEnumerable();
         }
 
         public IEnumerable<TEntity> GetPagedElements<TS>(int pageIndex, int pageCount, Expression<Func<TEntity, TS>> orderByExpression, bool @ascending)
@@ -85,6 +85,8 @@ namespace Apl.Data.Repositories
 
             return (ascending) ? DbSet.OrderBy(orderByExpression).Skip(pageIndex * pageCount).Take(pageCount).ToList() : DbSet.OrderByDescending(orderByExpression).Skip(pageIndex * pageCount).Take(pageCount).ToList();
         }
+
+        public DbContext Context { get; }
     }
 }
-}
+

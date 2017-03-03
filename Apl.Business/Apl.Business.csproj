@@ -30,7 +30,11 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\Apl.Data\bin\Debug\EntityFramework.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -40,6 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Constraints\GeneralConstraints.cs" />
     <Compile Include="Domain\ar_ccliente.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -64,6 +69,7 @@
     <Compile Include="Domain\entidad.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Domain\EntidadPartial.cs" />
     <Compile Include="Domain\gl_account.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -91,10 +97,17 @@
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\IEntityRepository.cs" />
     <Compile Include="Repositories\IRepository.cs" />
     <Compile Include="Specifications\ISpecification.cs" />
+    <Compile Include="UoW\IUnityOfWork.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\Apl.Business.Resources\Apl.Business.Resources.csproj">
+      <Project>{5ae87a09-79be-4b13-aeb6-d7e0c60af4ef}</Project>
+      <Name>Apl.Business.Resources</Name>
+    </ProjectReference>
+  </ItemGroup>
   <ItemGroup>
     <Content Include="Domain\Model.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

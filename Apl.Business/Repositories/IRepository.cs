@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Apl.Business.Specifications;
+using System.Data.Entity;
 
 namespace Apl.Business.Repositories
 {
@@ -19,7 +20,7 @@ namespace Apl.Business.Repositories
        IEnumerable<TEntity> GetPagedElements<TS>(int pageIndex, int pageCount,
            System.Linq.Expressions.Expression<Func<TEntity, TS>> orderByExpression, bool ascending);
 
+       DbContext Context { get; }
    }
-
 
 }

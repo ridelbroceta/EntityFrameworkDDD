@@ -5,7 +5,8 @@ using System.Linq;
 using System.Linq.Expressions;
 using Apl.Business.Repositories;
 using Apl.Business.Specifications;
-using Apl.Data.Model;
+using Apl.Business.UoW;
+using Apl.Data.UoW;
 
 namespace Apl.Data.Repositories
 {
@@ -13,18 +14,20 @@ namespace Apl.Data.Repositories
 
     public class GenericRepository<TEntity> : IRepository<TEntity> where TEntity : class
     {
-        internal readonly DefaultContext Context;
-        internal DbSet<TEntity> DbSet;
+        protected readonly IUnityOfWork UnityOfWork;
+        protected DbSet<TEntity> DbSet;
 
         //Constructor with Dependencies      
-        public GenericRepository(DefaultContext context)
+        public GenericRepository(IUnityOfWork unityOfWork, IUnityOfWork uoW)
         {
             //…          //set internal values         
-            Context = context;
-            DbSet = context.Set<TEntity>();
+            UnityOfWork = unityOfWork;
+            UoW = uoW;
+            var obj = UnityOfWork as UnityOfWork;
+            if (obj != null) DbSet = obj._myContext.Set<TEntity>();
+            else throw new NotImplementedException();
         }
 
-        public DefaultContext StoreContext => Context;
 
         public void Add(TEntity item)
         {
@@ -35,7 +38,8 @@ namespace Apl.Data.Repositories
         public void Remove(TEntity item)
         {
             //delete object to IObjectSet for this type 
-            if (Context.Entry(item).State == EntityState.Detached)
+            var unityOfWork = UnityOfWork as UnityOfWork;
+            if (unityOfWork != null && unityOfWork._myContext.Entry(item).State == EntityState.Detached)
             {
                 DbSet.Attach(item);
             }
@@ -50,7 +54,9 @@ namespace Apl.Data.Repositories
         public void Modify(TEntity item)
         {
             DbSet.Attach(item);
-            Context.Entry(item).State = EntityState.Modified;
+            var unityOfWork = UnityOfWork as UnityOfWork;
+            if (unityOfWork != null)
+                unityOfWork._myContext.Entry(item).State = EntityState.Modified;
         }
 
         public void Modify(ICollection<TEntity> items)
@@ -58,7 +64,9 @@ namespace Apl.Data.Repositories
             foreach (var item in items)
             {
                 DbSet.Attach(item);
-                Context.Entry(item).State = EntityState.Modified;
+                var unityOfWork = UnityOfWork as UnityOfWork;
+                if (unityOfWork != null)
+                    unityOfWork._myContext.Entry(item).State = EntityState.Modified;
             }
         }
 
@@ -86,7 +94,7 @@ namespace Apl.Data.Repositories
             return (ascending) ? DbSet.OrderBy(orderByExpression).Skip(pageIndex * pageCount).Take(pageCount).ToList() : DbSet.OrderByDescending(orderByExpression).Skip(pageIndex * pageCount).Take(pageCount).ToList();
         }
 
-        public DbContext Context { get; }
+        public IUnityOfWork UoW { get; }
     }
 }
 

@@ -1,4 +1,5 @@
-﻿using Apl.Application.IServices;
+﻿using System.Transactions;
+using Apl.Application.IServices;
 using Apl.Business.Domain;
 using Apl.Business.Repositories;
 
@@ -75,7 +76,19 @@ namespace Apl.Application.Services
 
         public void Add(entidad entidad)
         {
-            var context = _entityRepository.Context;
+            //Create a transaction context for this operation
+            TransactionOptions txSettings = new TransactionOptions()
+            {
+                Timeout = TransactionManager.DefaultTimeout,
+                IsolationLevel = IsolationLevel.Serializable
+            };
+            using (TransactionScope scope = new TransactionScope(TransactionScopeOption.Required, txSettings))
+            {
+                var unityOfW = _entityRepository.UoW;
+                _entityRepository.Add(entidad);
+                unityOfW.Save();
+                scope.Complete();
+            }
         }
     }
 }

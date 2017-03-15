@@ -6,7 +6,7 @@ using System.Linq.Expressions;
 using Apl.Business.Repositories;
 using Apl.Business.Specifications;
 using Apl.Business.UoW;
-using Apl.Data.UoW;
+using Apl.Data.Model;
 
 namespace Apl.Data.Repositories
 {
@@ -14,18 +14,15 @@ namespace Apl.Data.Repositories
 
     public class GenericRepository<TEntity> : IRepository<TEntity> where TEntity : class
     {
-        protected readonly IUnityOfWork UnityOfWork;
+        protected readonly DefaultContext DbContext;
         protected DbSet<TEntity> DbSet;
 
         //Constructor with Dependencies      
-        public GenericRepository(IUnityOfWork unityOfWork, IUnityOfWork uoW)
+        public GenericRepository(DefaultContext dbContext)
         {
             //…          //set internal values         
-            UnityOfWork = unityOfWork;
-            UoW = uoW;
-            var obj = UnityOfWork as UnityOfWork;
-            if (obj != null) DbSet = obj._myContext.Set<TEntity>();
-            else throw new NotImplementedException();
+            DbContext = dbContext;
+            DbSet = dbContext.Set<TEntity>();
         }
 
 
@@ -38,11 +35,7 @@ namespace Apl.Data.Repositories
         public void Remove(TEntity item)
         {
             //delete object to IObjectSet for this type 
-            var unityOfWork = UnityOfWork as UnityOfWork;
-            if (unityOfWork != null && unityOfWork._myContext.Entry(item).State == EntityState.Detached)
-            {
-                DbSet.Attach(item);
-            }
+            DbSet.Attach(item);
             DbSet.Remove(item);
         }
 
@@ -54,9 +47,7 @@ namespace Apl.Data.Repositories
         public void Modify(TEntity item)
         {
             DbSet.Attach(item);
-            var unityOfWork = UnityOfWork as UnityOfWork;
-            if (unityOfWork != null)
-                unityOfWork._myContext.Entry(item).State = EntityState.Modified;
+            DbContext.Entry(item).State = EntityState.Modified;
         }
 
         public void Modify(ICollection<TEntity> items)
@@ -64,9 +55,8 @@ namespace Apl.Data.Repositories
             foreach (var item in items)
             {
                 DbSet.Attach(item);
-                var unityOfWork = UnityOfWork as UnityOfWork;
-                if (unityOfWork != null)
-                    unityOfWork._myContext.Entry(item).State = EntityState.Modified;
+                DbContext.Entry(item).State = EntityState.Modified;
+                    
             }
         }
 
@@ -94,7 +84,7 @@ namespace Apl.Data.Repositories
             return (ascending) ? DbSet.OrderBy(orderByExpression).Skip(pageIndex * pageCount).Take(pageCount).ToList() : DbSet.OrderByDescending(orderByExpression).Skip(pageIndex * pageCount).Take(pageCount).ToList();
         }
 
-        public IUnityOfWork UoW { get; }
+        public IUnityOfWork UoW => DbContext as IUnityOfWork;
     }
 }
 

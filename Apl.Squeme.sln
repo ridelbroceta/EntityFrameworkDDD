@@ -11,6 +11,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Apl.Application", "Apl.Appl
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Apl.Business.Resources", "Apl.Business.Resources\Apl.Business.Resources.csproj", "{5AE87A09-79BE-4B13-AEB6-D7E0C60AF4EF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Apl.UI", "Apl.UI\Apl.UI.csproj", "{7DA327DE-0D28-4FAA-B096-4885DAC60BA3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Apl.IoCModules", "Apl.IoCModules\Apl.IoCModules.csproj", "{23EC48C0-8FA5-4628-A8C9-2DE4308D1B05}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +37,14 @@ Global
 		{5AE87A09-79BE-4B13-AEB6-D7E0C60AF4EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5AE87A09-79BE-4B13-AEB6-D7E0C60AF4EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5AE87A09-79BE-4B13-AEB6-D7E0C60AF4EF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7DA327DE-0D28-4FAA-B096-4885DAC60BA3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7DA327DE-0D28-4FAA-B096-4885DAC60BA3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7DA327DE-0D28-4FAA-B096-4885DAC60BA3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7DA327DE-0D28-4FAA-B096-4885DAC60BA3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{23EC48C0-8FA5-4628-A8C9-2DE4308D1B05}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{23EC48C0-8FA5-4628-A8C9-2DE4308D1B05}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{23EC48C0-8FA5-4628-A8C9-2DE4308D1B05}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{23EC48C0-8FA5-4628-A8C9-2DE4308D1B05}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -30,6 +30,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Autofac">
+      <HintPath>..\..\..\2015\SampleMvcWebAppComplex-master\ServiceLayer\bin\Debug\Autofac.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
       <Private>True</Private>
@@ -51,6 +54,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Start\DataLayerModule.cs" />
+    <Compile Include="Model\DefaultContextPartial.cs" />
     <Compile Include="Model\Model.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -63,8 +68,8 @@
       <DependentUpon>Model.edmx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\EntityRepository.cs" />
     <Compile Include="Repositories\GenericRepository.cs" />
-    <Compile Include="UoW\UnityOfWork.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.Config" />

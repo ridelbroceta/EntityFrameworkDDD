@@ -1,4 +1,5 @@
-﻿using System.Transactions;
+﻿using System.Collections.Generic;
+using System.Transactions;
 using Apl.Application.IServices;
 using Apl.Business.Domain;
 using Apl.Business.Repositories;
@@ -65,7 +66,7 @@ namespace Apl.Application.Services
          */
 
 
-    public class EntityService : IEntity
+    public class EntityService : IEntityService
     {
         private readonly IEntityRepository _entityRepository;
 
@@ -73,6 +74,12 @@ namespace Apl.Application.Services
         {
             _entityRepository = entityRepository;
         }
+
+        /*public EntityService()
+        {
+            _entityRepository = null;
+        }*/
+
 
         public void Add(entidad entidad)
         {
@@ -89,6 +96,27 @@ namespace Apl.Application.Services
                 unityOfW.Save();
                 scope.Complete();
             }
+        }
+
+        public void Modify(entidad entidad)
+        {
+            var unityOfW = _entityRepository.UoW;
+            _entityRepository.Modify(entidad);
+            unityOfW.Save();
+        }
+
+        public IEnumerable<entidad> GetAll()
+        {
+            //return new[] {new entidad() {Nombre = "Ridel", Apellidos = "ddd", CodId = "00022"}};
+            return _entityRepository.GetAll();
+        }
+
+        public void Remove(entidad entidad)
+        {
+            var unityOfW = _entityRepository.UoW;
+            _entityRepository.Remove(entidad);
+            unityOfW.Save();
+
         }
     }
 }

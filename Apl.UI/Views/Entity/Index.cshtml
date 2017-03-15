@@ -1,0 +1,28 @@
+﻿@model IEnumerable<Apl.Business.Domain.entidad>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<div>
+    @Html.ActionLink("Add", "Add", "Entity")    
+</div>
+
+
+<table class="table table-responsive">
+    <tbody>
+    @{
+        foreach (var item in Model)
+        {
+            <tr>
+                <td> @item.Nombre</td>
+                <td> @item.Apellidos</td>
+                <td> @item.CodId</td>
+            </tr>
+        }
+    }
+    </tbody>
+</table>
+
